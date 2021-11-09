@@ -77,23 +77,29 @@ bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
 	}
 	
 	PONT novoElemento = (PONT) malloc(sizeof(ELEMENTO));
-
+	
 	novoElemento->id = id;
 	novoElemento->ehPreferencial = ehPreferencial;
-	novoElemento->ant = f->cabeca;
-	novoElemento->prox = f->cabeca;
+	
 
-	PONT novoElemento1 = (PONT) malloc(sizeof(ELEMENTO));
-
-	novoElemento1->id = id + 1;
-	novoElemento1->ehPreferencial = ehPreferencial;
-	novoElemento1->ant = f->cabeca;
-	novoElemento1->prox = f->cabeca;
+	PONT aux = f->cabeca;
 
 	
-	f->cabeca->prox = novoElemento;
-	f->cabeca->prox->prox = novoElemento1;
-	return true;
+	while(true){
+
+		if (aux->prox == f->cabeca){
+
+			aux->prox = novoElemento;
+			novoElemento->prox = f->cabeca;
+			novoElemento->ant = aux;
+			return true;
+		
+		}else {
+
+			aux->ant = aux;
+			aux = aux->prox;
+		}
+	}
 	
 	
 }
