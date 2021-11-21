@@ -81,24 +81,10 @@ bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
 	novoElemento->id = id;
 	novoElemento->ehPreferencial = ehPreferencial;
 	
-
-	PONT aux = f->cabeca;
-
-	
-	while(true){
-
-		if (aux->prox == f->cabeca){
-
-			aux->prox = novoElemento;
-			novoElemento->prox = f->cabeca;
-			novoElemento->ant = aux;
-			return true;
-		
-		}else {
-
-			aux->ant = aux;
-			aux = aux->prox;
-		}
+	if (ehPreferencial == true){
+		PONT aux = f->cabeca;
+	}else{
+		PONT aux = f->inicioNaoPref;
 	}
 	
 	
