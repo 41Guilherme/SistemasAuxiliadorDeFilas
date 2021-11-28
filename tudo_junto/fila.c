@@ -76,7 +76,16 @@ bool consultarPreferencial(PFILA f, int id){
 	return -1;
 }
 
+PONT pickLast(PFILA f){
+    PONT x = (PONT) malloc(sizeof(ELEMENTO));
+    x = f->cabeca->ant;
+    if (x != f->cabeca){
 
+        return x;
+    }else{
+        return NULL;
+    }
+}
 
 bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
 
@@ -117,12 +126,11 @@ bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
             
             while(aux){
 
-                if(aux->prox == f->cabeca){
-                    novoElemento->prox = f->cabeca;
+                if(aux->prox->ehPreferencial == false){
+                    novoElemento->prox = aux->prox;
                     novoElemento->ant = aux;
-                    
                     aux->prox = novoElemento;
-                    f->cabeca->ant = novoElemento;
+
                     return true;
                 }else{
                     aux = aux->prox;
@@ -131,7 +139,7 @@ bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
             }
 
         }else{
-            PONT aux2 = f->inicioNaoPref;;
+            PONT aux2 = f->inicioNaoPref;
             while(aux2){
 
                 if(aux2->prox == f->cabeca){
@@ -194,9 +202,6 @@ bool desistirDaFila(PFILA f, int id){
     aux = NULL;
 	return true;
 }
-
-
-
 
 int main() {
 	PFILA f = criarFila();
@@ -323,3 +328,6 @@ int main() {
     */
 	return 0;
 }
+
+
+
