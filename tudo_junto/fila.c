@@ -236,7 +236,7 @@ int main() {
 	else printf("Insercao retornou false (6).\n");
 	exibirLog(f);
 
-
+    /*
 	printf("################# ATENDENDO #######################\n");
 	exibirLog(f);
 	res = atenderPrimeiraDaFila(f, &id);
@@ -320,6 +320,6 @@ int main() {
 	if(res) printf("Desistindo da fila retornou true (22). [OK]\n");
 	else printf("Desistindo da fila retornou false (22).\n");
 	exibirLog(f);
-
+    */
 	return 0;
 }
