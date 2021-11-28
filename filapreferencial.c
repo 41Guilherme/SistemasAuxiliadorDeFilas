@@ -71,59 +71,87 @@ bool consultarPreferencial(PFILA f, int id){
 
 
 bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
+
 	PONT x = buscarID(f,id);
 	if (x != NULL || id < 0){
 		return false;
 	}
-	
+	int tam = tamanho(f);
 	PONT novoElemento = (PONT) malloc(sizeof(ELEMENTO));
 	
 	novoElemento->id = id;
 	novoElemento->ehPreferencial = ehPreferencial;
 	
 	PONT aux = f->cabeca;
-	if (ehPreferencial == true){
-		
-		while(aux){
 
-			if(aux->prox == f->cabeca){
-				novoElemento->prox = f->cabeca;
-				novoElemento->ant = aux;
+    if (tam == 0){
+        if (ehPreferencial == true){
+
+            novoElemento->prox = f->cabeca;
+			novoElemento->ant = aux;
 				
-				aux->prox = novoElemento;
-				f->cabeca->ant = novoElemento;
-				return true;
-			}else{
-				aux = aux->prox;
-			}
-
-		}
-
-	}else{
-		
-		while(aux){
-
-			if(aux->prox == f->cabeca){
-				novoElemento->prox = f->cabeca;
-				novoElemento->ant = aux;
+			aux->prox = novoElemento;
+			f->cabeca->ant = novoElemento;
+			return true;
+        }else{
+            novoElemento->prox = f->cabeca;
+			novoElemento->ant = aux;
 				
-				aux->prox = novoElemento;
-				f->cabeca->ant = novoElemento;
-				return true;
-			}else{
-				aux = aux->prox;
-			}
+			aux->prox = novoElemento;
+			f->cabeca->ant = novoElemento;
+            f->inicioNaoPref->prox = novoElemento;
+            f->inicioNaoPref->ant = f->cabeca;
+			return true;
+        }
+    }else{
 
-		}
-		
-	}
+        if (ehPreferencial == true){
+            
+            while(aux){
+
+                if(aux->prox->ehPreferencial == false){
+                    novoElemento->prox = aux->prox;
+                    novoElemento->ant = aux->ant;
+                    aux->prox = novoElemento;
+                    
+                    return true;
+                }else{
+                    aux = aux->prox;
+                }
+
+            }
+
+        }else{
+            PONT aux2 = f->inicioNaoPref;
+            while(aux2){
+
+                if(aux2->prox == f->cabeca){
+                    novoElemento->prox = f->cabeca;
+                    novoElemento->ant = aux;
+                    
+                    aux->prox = novoElemento;
+                    f->cabeca->ant = novoElemento;
+                    return true;
+                }else{
+                    aux = aux->prox;
+                    aux2 = aux2->prox;
+                }
+
+            }
+            
+        }
+
+    }
+
+
 	
-	
+
 }
 
 bool atenderPrimeiraDaFila(PFILA f, int* id){
 
-	int tam = tamanho(f);
+	
+    int tam = tamanho(f);
 	if (tam <= 0){
 		return false;
 	}
@@ -135,17 +163,27 @@ bool atenderPrimeiraDaFila(PFILA f, int* id){
 	f->cabeca->prox = aux->prox;
 	aux->prox->ant = f->cabeca;
 	aux = NULL;
+
 	return true;
+
 }
 
 
 bool desistirDaFila(PFILA f, int id){
-
-	PONT verifica = buscarID(f,id);
+	
+    PONT verifica = buscarID(f,id);
 	if (verifica == NULL) return false;
 
-	
 
+    PONT aux = buscarID(f,id);
+
+    PONT antecessor = aux->ant;
+    PONT sucessor = aux->prox;
+
+    antecessor->prox = sucessor;
+    sucessor->ant = antecessor;
+    aux = NULL;
 	return true;
 }
+
 
