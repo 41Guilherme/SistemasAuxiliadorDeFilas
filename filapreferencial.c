@@ -123,18 +123,29 @@ bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
 
 bool atenderPrimeiraDaFila(PFILA f, int* id){
 
-	/* COMPLETE */
+	int tam = tamanho(f);
+	if (tam <= 0){
+		return false;
+	}
 
+	*id = f->cabeca->prox->id;
+	PONT aux;
+	aux = f->cabeca->prox;
 
-	return false;
+	f->cabeca->prox = aux->prox;
+	aux->prox->ant = f->cabeca;
+	aux = NULL;
+	return true;
 }
 
 
 bool desistirDaFila(PFILA f, int id){
 
-	/* COMPLETE */
+	PONT verifica = buscarID(f,id);
+	if (verifica == NULL) return false;
 
+	
 
-	return false;
+	return true;
 }
 
