@@ -76,16 +76,6 @@ bool consultarPreferencial(PFILA f, int id){
 	return -1;
 }
 
-PONT pickLast(PFILA f){
-    PONT x = (PONT) malloc(sizeof(ELEMENTO));
-    x = f->cabeca->ant;
-    if (x != f->cabeca){
-
-        return x;
-    }else{
-        return NULL;
-    }
-}
 
 bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
 
@@ -101,65 +91,51 @@ bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
 	
 	PONT aux = f->cabeca;
 
-    if (tam == 0){
-        if (ehPreferencial == true){
+    if (ehPreferencial == true){
 
-            novoElemento->prox = f->cabeca;
-			novoElemento->ant = aux;
-				
-			aux->prox = novoElemento;
-			f->cabeca->ant = novoElemento;
-			return true;
-        }else{
-            novoElemento->prox = f->cabeca;
-			novoElemento->ant = aux;
-				
-			aux->prox = novoElemento;
-			f->cabeca->ant = novoElemento;
-            f->inicioNaoPref->prox = novoElemento;
-            f->inicioNaoPref->ant = f->cabeca;
-			return true;
+        if (tam == 0) f->inicioNaoPref->prox = f->cabeca;
+        while(aux){
+
+            if(aux->prox == f->cabeca || aux->prox->ehPreferencial == false){
+
+                novoElemento->prox = aux->prox;
+                novoElemento->ant = aux;
+
+                aux->prox->ant = novoElemento;
+                aux->prox = novoElemento;
+                
+                if (aux->prox == f->cabeca){
+                    f->cabeca->ant = novoElemento;
+                    f->cabeca->prox = novoElemento;
+                    
+                }
+                return true;
+
+            }else{
+                aux = aux->prox;
+            }
         }
     }else{
-
-        if (ehPreferencial == true){
+        
+        while (aux){
             
-            while(aux){
+            if(aux->prox == f->cabeca){
 
-                if(aux->prox->ehPreferencial == false){
-                    novoElemento->prox = aux->prox;
-                    novoElemento->ant = aux;
-                    aux->prox = novoElemento;
+                novoElemento->prox = f->cabeca;
+                novoElemento->ant = aux;
 
-                    return true;
-                }else{
-                    aux = aux->prox;
+                aux->prox = novoElemento;
+                f->cabeca->ant = novoElemento;
+                if(f->inicioNaoPref->prox == f->cabeca) {
+                    f->inicioNaoPref->prox = novoElemento;
                 }
-
+                return true;
+            }else{
+                aux = aux->prox;
             }
-
-        }else{
-            PONT aux2 = f->inicioNaoPref;
-            while(aux2){
-
-                if(aux2->prox == f->cabeca){
-                    novoElemento->prox = f->cabeca;
-                    novoElemento->ant = aux;
-                    
-                    aux->prox = novoElemento;
-                    f->cabeca->ant = novoElemento;
-                    return true;
-                }else{
-                    aux = aux->prox;
-                    aux2 = aux2->prox;
-                }
-
-            }
-            
         }
-
+        
     }
-
 
 	
 
@@ -191,7 +167,6 @@ bool desistirDaFila(PFILA f, int id){
     PONT verifica = buscarID(f,id);
 	if (verifica == NULL) return false;
 
-
     PONT aux = buscarID(f,id);
 
     PONT antecessor = aux->ant;
@@ -208,7 +183,7 @@ int main() {
 	int id;
 	bool ehPreferencial;
 	bool res;
-
+    
 	printf("################# INSERINDO #######################\n");
 
 	exibirLog(f);
@@ -241,7 +216,7 @@ int main() {
 	else printf("Insercao retornou false (6).\n");
 	exibirLog(f);
 
-    /*
+    
 	printf("################# ATENDENDO #######################\n");
 	exibirLog(f);
 	res = atenderPrimeiraDaFila(f, &id);
@@ -278,7 +253,6 @@ int main() {
 	if(res) printf("Atendimento retornou true (13), id=%i.\n",id);
 	else printf("Atendimento retornou false (13). [OK]\n");
 	exibirLog(f);
-
 
 
 	printf("################# INSERINDO PARTE 2 ###############\n");
@@ -325,7 +299,7 @@ int main() {
 	if(res) printf("Desistindo da fila retornou true (22). [OK]\n");
 	else printf("Desistindo da fila retornou false (22).\n");
 	exibirLog(f);
-    */
+    
 	return 0;
 }
 
