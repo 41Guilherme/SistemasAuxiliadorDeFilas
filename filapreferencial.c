@@ -84,65 +84,51 @@ bool inserirPessoaNaFila(PFILA f, int id, bool ehPreferencial){
 	
 	PONT aux = f->cabeca;
 
-    if (tam == 0){
-        if (ehPreferencial == true){
+    if (ehPreferencial == true){
 
-            novoElemento->prox = f->cabeca;
-			novoElemento->ant = aux;
-				
-			aux->prox = novoElemento;
-			f->cabeca->ant = novoElemento;
-			return true;
-        }else{
-            novoElemento->prox = f->cabeca;
-			novoElemento->ant = aux;
-				
-			aux->prox = novoElemento;
-			f->cabeca->ant = novoElemento;
-            f->inicioNaoPref->prox = novoElemento;
-            f->inicioNaoPref->ant = f->cabeca;
-			return true;
+        if (tam == 0) f->inicioNaoPref->prox = f->cabeca;
+        while(aux){
+
+            if(aux->prox == f->cabeca || aux->prox->ehPreferencial == false){
+
+                novoElemento->prox = aux->prox;
+                novoElemento->ant = aux;
+
+                aux->prox->ant = novoElemento;
+                aux->prox = novoElemento;
+                
+                if (aux->prox == f->cabeca){
+                    f->cabeca->ant = novoElemento;
+                    f->cabeca->prox = novoElemento;
+                    
+                }
+                return true;
+
+            }else{
+                aux = aux->prox;
+            }
         }
     }else{
-
-        if (ehPreferencial == true){
+        
+        while (aux){
             
-            while(aux){
+            if(aux->prox == f->cabeca){
 
-                if(aux->prox->ehPreferencial == false){
-                    novoElemento->prox = aux->prox;
-                    novoElemento->ant = aux->ant;
-                    aux->prox = novoElemento;
-                    
-                    return true;
-                }else{
-                    aux = aux->prox;
+                novoElemento->prox = f->cabeca;
+                novoElemento->ant = aux;
+
+                aux->prox = novoElemento;
+                f->cabeca->ant = novoElemento;
+                if(f->inicioNaoPref->prox == f->cabeca) {
+                    f->inicioNaoPref->prox = novoElemento;
                 }
-
+                return true;
+            }else{
+                aux = aux->prox;
             }
-
-        }else{
-            PONT aux2 = f->inicioNaoPref;
-            while(aux2){
-
-                if(aux2->prox == f->cabeca){
-                    novoElemento->prox = f->cabeca;
-                    novoElemento->ant = aux;
-                    
-                    aux->prox = novoElemento;
-                    f->cabeca->ant = novoElemento;
-                    return true;
-                }else{
-                    aux = aux->prox;
-                    aux2 = aux2->prox;
-                }
-
-            }
-            
         }
-
+        
     }
-
 
 	
 
@@ -173,7 +159,6 @@ bool desistirDaFila(PFILA f, int id){
 	
     PONT verifica = buscarID(f,id);
 	if (verifica == NULL) return false;
-
 
     PONT aux = buscarID(f,id);
 
