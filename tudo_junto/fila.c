@@ -217,42 +217,42 @@ int main() {
 	exibirLog(f);
 
     
-	printf("################# ATENDENDO #######################\n");
-	exibirLog(f);
-	res = atenderPrimeiraDaFila(f, &id);
-	if(res) printf("Atendimento retornou true (7), id=%i. [OK]\n",id);
-	else printf("Atendimento retornou false (7).\n");
+	// printf("################# ATENDENDO #######################\n");
+	// exibirLog(f);
+	// res = atenderPrimeiraDaFila(f, &id);
+	// if(res) printf("Atendimento retornou true (7), id=%i. [OK]\n",id);
+	// else printf("Atendimento retornou false (7).\n");
 
-	exibirLog(f);
-	res = atenderPrimeiraDaFila(f, &id);
-	if(res) printf("Atendimento retornou true (8), id=%i. [OK]\n",id);
-	else printf("Atendimento retornou false (8).\n");
+	// exibirLog(f);
+	// res = atenderPrimeiraDaFila(f, &id);
+	// if(res) printf("Atendimento retornou true (8), id=%i. [OK]\n",id);
+	// else printf("Atendimento retornou false (8).\n");
 
-	exibirLog(f);
-	res = atenderPrimeiraDaFila(f, &id);
-	if(res) printf("Atendimento retornou true (9), id=%i. [OK]\n",id);
-	else printf("Atendimento retornou false (9).\n");
+	// exibirLog(f);
+	// res = atenderPrimeiraDaFila(f, &id);
+	// if(res) printf("Atendimento retornou true (9), id=%i. [OK]\n",id);
+	// else printf("Atendimento retornou false (9).\n");
 
-	exibirLog(f);
-	res = atenderPrimeiraDaFila(f, &id);
-	if(res) printf("Atendimento retornou true (10), id=%i. [OK]\n",id);
-	else printf("Atendimento retornou false (10).\n");
+	// exibirLog(f);
+	// res = atenderPrimeiraDaFila(f, &id);
+	// if(res) printf("Atendimento retornou true (10), id=%i. [OK]\n",id);
+	// else printf("Atendimento retornou false (10).\n");
 
-	exibirLog(f);
-	res = atenderPrimeiraDaFila(f, &id);
-	if(res) printf("Atendimento retornou true (11), id=%i. [OK]\n",id);
-	else printf("Atendimento retornou false (11).\n");
+	// exibirLog(f);
+	// res = atenderPrimeiraDaFila(f, &id);
+	// if(res) printf("Atendimento retornou true (11), id=%i. [OK]\n",id);
+	// else printf("Atendimento retornou false (11).\n");
 
-	exibirLog(f);
-	res = atenderPrimeiraDaFila(f, &id);
-	if(res) printf("Atendimento retornou true (12), id=%i. [OK]\n",id);
-	else printf("Atendimento retornou false (12).\n");
+	// exibirLog(f);
+	// res = atenderPrimeiraDaFila(f, &id);
+	// if(res) printf("Atendimento retornou true (12), id=%i. [OK]\n",id);
+	// else printf("Atendimento retornou false (12).\n");
 
-	exibirLog(f);
-	res = atenderPrimeiraDaFila(f, &id);
-	if(res) printf("Atendimento retornou true (13), id=%i.\n",id);
-	else printf("Atendimento retornou false (13). [OK]\n");
-	exibirLog(f);
+	// exibirLog(f);
+	// res = atenderPrimeiraDaFila(f, &id);
+	// if(res) printf("Atendimento retornou true (13), id=%i.\n",id);
+	// else printf("Atendimento retornou false (13). [OK]\n");
+	// exibirLog(f);
 
 
 	printf("################# INSERINDO PARTE 2 ###############\n");
@@ -295,11 +295,26 @@ int main() {
 	if(res) printf("Desistindo da fila retornou true (21). [OK]\n");
 	else printf("Desistindo da fila retornou false (21).\n");
 	exibirLog(f);
-	res = desistirDaFila(f, 10);
+	res = desistirDaFila(f, 1);
 	if(res) printf("Desistindo da fila retornou true (22). [OK]\n");
 	else printf("Desistindo da fila retornou false (22).\n");
 	exibirLog(f);
-    
+    res = desistirDaFila(f, 2);
+	if(res) printf("Desistindo da fila retornou true (22). [OK]\n");
+	else printf("Desistindo da fila retornou false (22).\n");
+	exibirLog(f);
+    res = desistirDaFila(f, 3);
+	if(res) printf("Desistindo da fila retornou true (22). [OK]\n");
+	else printf("Desistindo da fila retornou false (22).\n");
+	exibirLog(f);
+    res = desistirDaFila(f, 4);
+	if(res) printf("Desistindo da fila retornou true (22). [OK]\n");
+	else printf("Desistindo da fila retornou false (22).\n");
+	exibirLog(f);
+    res = desistirDaFila(f, 5);
+	if(res) printf("Desistindo da fila retornou true (22). [OK]\n");
+	else printf("Desistindo da fila retornou false (22).\n");
+	exibirLog(f);
 	return 0;
 }
 
